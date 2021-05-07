@@ -13,7 +13,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='edge',
+    maintainer='ragesh',
     maintainer_email='ragesh.ramachandran.ipa.fraunhofer.de',
     description='TODO: Package description',
     license='TODO: License declaration',
