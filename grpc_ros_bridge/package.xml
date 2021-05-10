@@ -4,7 +4,7 @@
   <name>grpc_ros_bridge</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="ragesh.ramachandran.ipa.fraunhofer.de">edge</maintainer>
+  <maintainer email="ragesh.ramachandran@ipa.fraunhofer.de">ragesh_ramachandran</maintainer>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>
