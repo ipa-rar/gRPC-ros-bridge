@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'grpc_ros_bridge'
+package_name = 'ros_client_app'
 
 setup(
     name=package_name,
@@ -13,14 +13,14 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='ragesh',
+    maintainer='edge',
     maintainer_email='ragesh.ramachandran.ipa.fraunhofer.de',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'grpc_ros_bridge = grpc_ros_bridge.main:main'
+            'client_node = ros_client_app.client_node:main'
         ],
     },
 )
