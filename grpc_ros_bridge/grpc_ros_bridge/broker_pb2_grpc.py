@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from generated import broker_pb2 as broker__pb2
+from . import broker_pb2 as broker__pb2
 
 
 class BrokerServiceStub(object):
