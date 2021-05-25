@@ -6,6 +6,7 @@
 import grpc
 import rclpy
 from rclpy.node import Node
+from rclpy.executors import SingleThreadedExecutor
 
 from grpc_ros_interface.msg import BrokerRequest
 from grpc_ros_interface.msg import BrokerResponse
@@ -19,7 +20,6 @@ class GrpcRosBridge(Node):
 
     def __init__(self):
         super().__init__('grpc_ros_bridge')
-
         channel = grpc.insecure_channel(port)
         self.stub = pb2_grpc.BrokerServiceStub(channel)
         self.client_subsciber = self.create_subscription(
@@ -60,15 +60,28 @@ class GrpcRosBridge(Node):
         self.pub.publish(msg)
 
 
+# class GrpcPublisher(Node):
+#     def __init__(self):
+#         super().__init__('grpc_ros_bridge')
+#         pass
+
 def main(args=None):
     rclpy.init(args=args)
     try:
         grpc_ros_bridge = GrpcRosBridge()
-        rclpy.spin(grpc_ros_bridge)
+        #client_subscriber = ClientSubscriber()
+        executor = SingleThreadedExecutor()
+        executor.add_node(grpc_ros_bridge)
+        #executor.add_node(client_subscriber)
+        try:
+            executor.spin()
+        finally:
+            executor.shutdown()
+            grpc_ros_bridge.destroy_node()
+            #client_subscriber.destroy_node()
+    
     except KeyboardInterrupt:
-        grpc_ros_bridge.destroy_node()
         rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()

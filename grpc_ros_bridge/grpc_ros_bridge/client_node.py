@@ -1,60 +1,77 @@
-# Publishes  'BrokerRequest'
-# to Topic 'broker_topic'
-# 0.1 sec interval publishing
-# QoS is 10 by default
+import random
+
 import rclpy
 from rclpy.node import Node
+from rclpy.executors import SingleThreadedExecutor
 from grpc_ros_interface.msg import BrokerRequest
-import csv
-import random
+from grpc_ros_interface.msg import BrokerResponse
 
 
 class ClientPublisher(Node):
+    """""
+    Publishes 'BrokerRequest' to Topic 'broker_topic'
+    0.1 sec interval publishing and QoS is 10 by default
+    """""
 
-    def __init__(self):
+    def __init__(self, topic='broker_topic', msg_type=BrokerRequest):
         super().__init__('client_publisher')
-        csv_filename = "src/grpc_ros_bridge/dataset/sensors.csv"
-        dataset = open(csv_filename, "r")
-        self.row = csv.reader(dataset, delimiter=",")
         self.pub = self.create_publisher(
-            BrokerRequest,
-            'broker_topic',
+            msg_type,
+            topic,
             10)
         publish_rate = 0.5
+        self.id = 0
         #self.timer = self.create_timer(publish_rate, self.publisher_cb)
-        self.timer = self.create_timer(publish_rate, self.fake_publisher_cb)
+        self.timer = self.create_timer(publish_rate, self.publisher_cb)
 
-    def fake_publisher_cb(self):
+    def publisher_cb(self):
         msg = BrokerRequest()
-        msg.id = random.randint(0, 9)
+        self.id +=1
+        msg.id = self.id
         msg.sensor_1 = random.random()
         msg.sensor_2 = random.random()
         msg.sensor_3 = random.random()
         msg.sensor_4 = random.random()
         self.pub.publish(msg)
-        self.get_logger().info('Client publishing : %d %g %g %g %g' %
+        self.get_logger().info('Client streaming :| %d | %g | %g | %g | %g |' %
                                (msg.id, msg.sensor_1, msg.sensor_2, msg.sensor_3, msg.sensor_4))
 
-    def publisher_cb(self):
-        msg = BrokerRequest()
-        for i, data in enumerate(self.row):
-            msg.id = int(data[0])
-            msg.sensor_1 = float(data[1])
-            msg.sensor_2 = float(data[2])
-            msg.sensor_3 = float(data[3])
-            msg.sensor_4 = float(data[4])
-            self.pub.publish(msg)
-            self.get_logger().info('Client publishing : %d %g %g %g %g' %
-                                   (msg.id, msg.sensor_1, msg.sensor_2, msg.sensor_3, msg.sensor_4))
+
+class ClientSubscriber(Node):
+    """""
+    Subscribes 'BrokerResponse' from Topic 'broker_topic'
+    as and when the message is available in the topic
+    """""
+    def __init__(self):
+        super().__init__('client_subscriber')
+        self.client_subsciber = self.create_subscription(
+            BrokerResponse,
+            'broker_topic',
+            self.subscriber_cb,
+            10
+        )
+    
+    def subscriber_cb(self, msg):
+        self.get_logger().info('Client received:| %d | %r |' % (msg.id, msg.prediction))
 
 
 def main(args=None):
     rclpy.init(args=args)
     try:
         client_publisher = ClientPublisher()
-        rclpy.spin(client_publisher)
+        client_subscriber = ClientSubscriber()
+        
+        executor = SingleThreadedExecutor()
+        executor.add_node(client_publisher)
+        executor.add_node(client_subscriber)
+        try:
+            executor.spin()
+        finally:
+            executor.shutdown()
+            client_publisher.destroy_node()
+            client_subscriber.destroy_node()
+
     except KeyboardInterrupt:
-        client_publisher.destroy_node()
         rclpy.shutdown()
 
 

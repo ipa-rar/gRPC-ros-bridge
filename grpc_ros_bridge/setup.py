@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'bridge = grpc_ros_bridge.grpc_bridge:main',
+            'bridge = grpc_ros_bridge.broker_bridge:main',
             'client_app = grpc_ros_bridge.client_node:main'
         ],
     },
