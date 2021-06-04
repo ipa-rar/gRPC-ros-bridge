@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from . import broker_pb2 as broker__pb2
+from . import databroker_pb2 as databroker__pb2
 
 
 class BrokerServiceStub(object):
@@ -16,8 +16,8 @@ class BrokerServiceStub(object):
         """
         self.BidirectionalStreaming = channel.stream_stream(
                 '/bidirectional_databroker.BrokerService/BidirectionalStreaming',
-                request_serializer=broker__pb2.BrokerRequest.SerializeToString,
-                response_deserializer=broker__pb2.BrokerResponse.FromString,
+                request_serializer=databroker__pb2.BrokerRequest.SerializeToString,
+                response_deserializer=databroker__pb2.BrokerResponse.FromString,
                 )
 
 
@@ -35,8 +35,8 @@ def add_BrokerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'BidirectionalStreaming': grpc.stream_stream_rpc_method_handler(
                     servicer.BidirectionalStreaming,
-                    request_deserializer=broker__pb2.BrokerRequest.FromString,
-                    response_serializer=broker__pb2.BrokerResponse.SerializeToString,
+                    request_deserializer=databroker__pb2.BrokerRequest.FromString,
+                    response_serializer=databroker__pb2.BrokerResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -60,7 +60,7 @@ class BrokerService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.stream_stream(request_iterator, target, '/bidirectional_databroker.BrokerService/BidirectionalStreaming',
-            broker__pb2.BrokerRequest.SerializeToString,
-            broker__pb2.BrokerResponse.FromString,
+            databroker__pb2.BrokerRequest.SerializeToString,
+            databroker__pb2.BrokerResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
