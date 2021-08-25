@@ -12,7 +12,6 @@ class ClientPublisher(Node):
     Publishes 'BrokerRequest' to Topic 'request_topic'
     0.1 sec interval publishing and QoS is 10 by default
     """""
-
     def __init__(self, topic='request_topic', msg_type=BrokerRequest):
         super().__init__('data_publisher')
         self.pub = self.create_publisher(
@@ -28,10 +27,10 @@ class ClientPublisher(Node):
         msg = BrokerRequest()
         self.i += 1
         msg.id = self.i
-        msg.sensor_1 = random.random()
-        msg.sensor_2 = random.random()
-        msg.sensor_3 = random.random()
-        msg.sensor_4 = random.random()
+        msg.sensor_1 = float(random.uniform(0, 1))
+        msg.sensor_2 = float(random.uniform(0, 1))
+        msg.sensor_3 = float(random.uniform(0, 1))
+        msg.sensor_4 = float(random.uniform(0, 1))
         self.pub.publish(msg)
         self.get_logger().info('Client streaming :| %d | %g | %g | %g | %g |' %
                                (msg.id, msg.sensor_1, msg.sensor_2, msg.sensor_3, msg.sensor_4))

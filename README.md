@@ -16,3 +16,13 @@
 - sending req from subscribed ROS topic
 - Reciving the response and publishing back to the ROS topic
 
+## Troubleshooting
+Check all open ports to see the connection status
+```
+netstat -atun  | grep '8061
+```
+```
+tcp6       0      0 127.0.0.1:8061          :::*                    LISTEN     
+tcp6       0      0 127.0.0.1:42186         127.0.0.1:8061          ESTABLISHED
+tcp6       0      0 127.0.0.1:8061          127.0.0.1:42186         ESTABLISHED
+```
