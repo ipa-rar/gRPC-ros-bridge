@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'grpc_ros_bridge'
+package_name = 'grpc_ros_data_generator'
 
 setup(
     name=package_name,
@@ -14,14 +14,13 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='ragesh',
-    maintainer_email='ragesh.ramachandran.ipa.fraunhofer.de',
+    maintainer_email='ragesh.ramachandran@ipa.fraunhofer.de',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
-            'bridge = grpc_ros_bridge.broker_bridge:main',
-            'client_app = grpc_ros_bridge.client_node:main'
+        ''console_scripts': [
+            'generator_node = grpc_ros_data_generator.generator:main'
         ],
     },
 )

@@ -14,7 +14,7 @@ class ClientPublisher(Node):
     """""
 
     def __init__(self, topic='request_topic', msg_type=BrokerRequest):
-        super().__init__('client_publisher')
+        super().__init__('data_publisher')
         self.pub = self.create_publisher(
             msg_type,
             topic,
@@ -44,7 +44,7 @@ class ClientSubscriber(Node):
     """""
 
     def __init__(self, topic='response_topic', msg_type=BrokerResponse):
-        super().__init__('client_subscriber')
+        super().__init__('data_subscriber')
         self.client_subsciber = self.create_subscription(
             msg_type,
             topic,
