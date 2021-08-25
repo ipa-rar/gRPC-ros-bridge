@@ -1,26 +1,28 @@
-# gRPC-ros-bridge 
-- This is a ROS2 package which can subscribe to ROS2 topic and send gRPC request to gRPC servers, receive gRPC response and then publish back to the ROS2 node.
+# gRPC-ros-client 
+- This is a ROS2 package which can subscribe to ROS2 topic and send gRPC request to gRPC servers, receive gRPC response and then publish back to the ROS2 node. 
 
-## Starting up
+## Usage
 - First, run the gRPC server and expose port 8061.
+```
+https://github.com/ipa-rar/gRPC-servers.git
+cd gRPC-servers/demo_simple_communication/server
+python3 server.py
+```
 - Build the workspace 
-    - `colcon build`
+    - `colcon build --symlink-install`
     - `source instal/setup.bash`
-- Then run the `client_node.py` which is the client that sends request to the server using the ROS-gRPC bridge.
-    - ``ros2 run grpc_ros_bridge client_node``
-- Now start the bridge node `broker_bridge.py` to initiate the conversion of ROS msgs to proto msgs.
-    - ``ros2 run grpc_ros_bridge broker_bridge``
+- Then run the `generator.py` which is the fake data generator to test the client-server function. 
+    - ``ros2 run grpc_ros_data_generator generator_node``
+- Now start the grpc client node `grpc_client.py` to initiate the conversion of ROS msgs to proto msgs.
+    - ``ros2 run grpc_ros_client grpc_client_node``
 
-## To dos
-
-- sending req from subscribed ROS topic
-- Reciving the response and publishing back to the ROS topic
 
 ## Troubleshooting
 Check all open ports to see the connection status
 ```
-netstat -atun  | grep '8061
+netstat -atun  | grep '8061'
 ```
+Correct open ports
 ```
 tcp6       0      0 127.0.0.1:8061          :::*                    LISTEN     
 tcp6       0      0 127.0.0.1:42186         127.0.0.1:8061          ESTABLISHED
