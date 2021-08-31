@@ -1,7 +1,7 @@
 # gRPC-ros-client 
 - This is a ROS2 package which can subscribe to ROS2 topic and send gRPC request to gRPC servers, receive gRPC response and then publish back to the ROS2 node. 
 
-## Usage
+## Installation
 - First, run the gRPC server and expose port 8061.
 ```
 https://github.com/ipa-rar/gRPC-servers.git
@@ -15,16 +15,3 @@ python3 server.py
     - ``ros2 run grpc_ros_data_generator generator_node``
 - Now start the grpc client node `grpc_client.py` to initiate the conversion of ROS msgs to proto msgs.
     - ``ros2 run grpc_ros_client grpc_client_node``
-
-
-## Troubleshooting
-Check all open ports to see the connection status
-```
-netstat -atun  | grep '8061'
-```
-Correct open ports
-```
-tcp6       0      0 127.0.0.1:8061          :::*                    LISTEN     
-tcp6       0      0 127.0.0.1:42186         127.0.0.1:8061          ESTABLISHED
-tcp6       0      0 127.0.0.1:8061          127.0.0.1:42186         ESTABLISHED
-```
