@@ -15,3 +15,9 @@ python3 server.py
     - ``ros2 run grpc_ros_data_generator generator_node``
 - Now start the grpc client node `grpc_client.py` to initiate the conversion of ROS msgs to proto msgs.
     - ``ros2 run grpc_ros_client grpc_client_node``
+
+
+## To Do
+- Write [unit tests](https://answers.ros.org/question/356180/ros2-creating-integration-tests-for-python-nodes/) for the nodes
+- Fix communication issues in docker
+- generalize the client 
