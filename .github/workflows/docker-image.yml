@@ -35,20 +35,29 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Extract metadata (tags, labels) of grpc-ros-client
+      - name: Extract metadata (tags, labels) of grpc-ros-client & grpc-server-app
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
+          images: |
+            ragesh18/grpc-server-app
+            ghcr.io/${{ github.repository }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           images: |
             ragesh18/grpc-ros-client
             ghcr.io/${{ github.repository }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
     
       - name: Build and push Docker images of grpc-ros-client
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
+          file: docker/Dockerfile-server
+          context: ./docker
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           file: docker/Dockerfile
           context: ./docker
           push: true
