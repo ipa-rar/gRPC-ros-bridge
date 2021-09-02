@@ -1,0 +1,16 @@
+FROM python:3.8
+LABEL maintainer "Ragesh Ramachandran <ragesh.ramachandran@ipa.fraunhofer.de>"
+SHELL ["/bin/bash","-c"]
+ENV WS=/root/ws
+RUN apt-get update -y \
+    && apt-get install -y python3-pip python3-dev \
+    && pip3 install --upgrade pip
+
+WORKDIR $WS/
+RUN git clone https://github.com/ipa-rar/gRPC-servers.git
+WORKDIR $WS/gRPC-servers/demo_simple_communication
+RUN pip3 install -r requirements.txt
+RUN pip3 install --upgrade protobuf
+
+WORKDIR $WS/gRPC-servers/demo_simple_communication/server
+CMD [ "python3", "server.py" ]

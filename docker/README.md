@@ -5,7 +5,7 @@ Clone this [repo](https://github.com/ipa-rar/gRPC-servers/tree/main/demo_simple_
 
 Build docker image
 ```
-docker build -t grpc_server_app -f docker/Dockerfile .
+docker build -t simple_server_app -f docker/Dockerfile .
 ```
 Run the docker image
 ```
@@ -23,3 +23,8 @@ Run the docker image
 docker run grpc_client_app
 ```
 
+## Full system launch
+
+```
+docker-compose up
+```

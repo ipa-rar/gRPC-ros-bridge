@@ -1,0 +1,20 @@
+version: "3"
+services:
+  simple_server_app:
+      container_name: simple_server_app
+      image: simple_server_app
+      ports:
+        - 50051:50051
+      networks:
+        - grpc_bridge
+  grpc_ros_client:
+      container_name: grpc_ros_client
+      image: grpc_client_app
+      networks:
+        - grpc_bridge
+      depends_on: 
+        - simple_server_app
+networks:
+  grpc_bridge:
+    external: true
+    driver: bridge

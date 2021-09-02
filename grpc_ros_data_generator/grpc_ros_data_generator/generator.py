@@ -32,8 +32,8 @@ class ClientPublisher(Node):
         msg.sensor_3 = float(random.uniform(0, 1))
         msg.sensor_4 = float(random.uniform(0, 1))
         self.pub.publish(msg)
-        self.get_logger().info('Client streaming :| %d | %g | %g | %g | %g |' %
-                               (msg.id, msg.sensor_1, msg.sensor_2, msg.sensor_3, msg.sensor_4))
+        #self.get_logger().info('Client streaming :| %d | %g | %g | %g | %g |' %
+        #                       (msg.id, msg.sensor_1, msg.sensor_2, msg.sensor_3, msg.sensor_4))
 
 
 class ClientSubscriber(Node):
