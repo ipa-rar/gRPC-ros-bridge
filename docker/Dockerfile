@@ -21,7 +21,7 @@ WORKDIR ${ROS2_WS}/src
 COPY ./ ./
 # Install grpc dependencies
 WORKDIR ${ROS2_WS}/src/gRPC-ros-bridge
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r ./requirements.txt
 RUN pip3 install --upgrade protobuf
 
 WORKDIR ${ROS2_WS}
