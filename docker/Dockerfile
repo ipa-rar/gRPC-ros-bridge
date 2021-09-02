@@ -13,15 +13,17 @@ RUN apt update && \
 RUN apt-get update -y \
     && apt-get install -y python3-pip python3-dev \
     && pip3 install --upgrade pip
-# Install grpc dependencies
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-RUN pip3 install --upgrade protobuf
+
 # Setup package to build
 ENV ROS2_WS=/home/ros2_ws
 RUN mkdir -p ${ROS2_WS}/src
 WORKDIR ${ROS2_WS}/src
 COPY ./ ./
+# Install grpc dependencies
+WORKDIR ${ROS2_WS}/src/gRPC-ros-bridge
+RUN pip3 install -r requirements.txt
+RUN pip3 install --upgrade protobuf
+
 WORKDIR ${ROS2_WS}
 # Build packages
 RUN rosdep update
