@@ -31,7 +31,7 @@ RUN cd ${ROS2_WS} \
     && colcon build 
 
 #Entrypoint commands
-COPY ./docker/entrypoint.sh /
+WORKDIR ${ROS2_WS}/src/gRPC-ros-bridge/docker
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
