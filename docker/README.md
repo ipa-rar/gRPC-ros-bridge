@@ -15,7 +15,7 @@ docker run simple_server_app
 ## 2. gRPC-ROS client image
 Build docker image
 ```
-docker build -t grpc_client_app -f docker/Dockerfile .
+docker build -t grpc_client_app -f docker/Dockerfile-client .
 ```
 
 Run the docker image
