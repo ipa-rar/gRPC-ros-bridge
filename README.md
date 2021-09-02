@@ -1,8 +1,7 @@
 # gRPC-ros-client 
 - This is a ROS2 package which can subscribe to ROS2 topic and send gRPC request to gRPC servers, receive gRPC response and then publish back to the ROS2 node. 
-- <br/>
-[![Docker GRPC server image](https://github.com/ipa-rar/gRPC-ros-bridge/actions/workflows/docker-server.yml/badge.svg)](https://github.com/ipa-rar/gRPC-ros-bridge/actions/workflows/docker-server.yml)
 <br/>
+[![Docker GRPC server image](https://github.com/ipa-rar/gRPC-ros-bridge/actions/workflows/docker-server.yml/badge.svg)](https://github.com/ipa-rar/gRPC-ros-bridge/actions/workflows/docker-server.yml)
 [![Docker GRPC-ROS image](https://github.com/ipa-rar/gRPC-ros-bridge/actions/workflows/docker-image.yml/badge.svg)](https://github.com/ipa-rar/gRPC-ros-bridge/actions/workflows/docker-image.yml)
 <br/>
 ## Installation
