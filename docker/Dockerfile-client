@@ -21,6 +21,7 @@ WORKDIR ${ROS2_WS}/src
 RUN git clone https://github.com/ipa-rar/gRPC-ros-bridge.git
 WORKDIR ${ROS2_WS}/src/gRPC-ros-bridge
 # Install grpc dependencies
+ADD requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 RUN pip3 install --upgrade protobuf
 # Build packages
@@ -32,7 +33,7 @@ RUN cd ${ROS2_WS} \
     && colcon build 
 
 #Entrypoint commands
-WORKDIR ${ROS2_WS}/src/gRPC-ros-bridge
+WORKDIR ${ROS2_WS}/src/gRPC-ros-bridge/docker
 ADD ./docker/entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
