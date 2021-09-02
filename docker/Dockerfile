@@ -14,7 +14,7 @@ RUN apt-get update -y \
     && apt-get install -y python3-pip python3-dev \
     && pip3 install --upgrade pip
 # Install grpc dependencies
-COPY requirements.txt requirements.txt
+COPY ./requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 RUN pip3 install --upgrade protobuf
 # Setup package to build
