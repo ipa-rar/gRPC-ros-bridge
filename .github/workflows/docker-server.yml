@@ -1,4 +1,4 @@
-name: Docker GRPC server image 
+name: Docker server CI 
 
 on:
   push:

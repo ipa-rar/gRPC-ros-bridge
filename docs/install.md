@@ -15,15 +15,3 @@ python3 server.py
 4. Now start the grpc client node `grpc_client.py` to initiate the conversion of ROS msgs to proto msgs.
     - ``ros2 run grpc_ros_client grpc_client_node``
 
-
-# Troubleshooting
-Check all open ports to see the connection status
-```
-netstat -atun  | grep '8061'
-```
-Correct open ports
-```
-tcp6       0      0 127.0.0.1:8061          :::*                    LISTEN     
-tcp6       0      0 127.0.0.1:42186         127.0.0.1:8061          ESTABLISHED
-tcp6       0      0 127.0.0.1:8061          127.0.0.1:42186         ESTABLISHED
-```

@@ -1,4 +1,4 @@
-name: Docker GRPC-ROS image
+name: Docker client CI 
 
 on:
   push:
