@@ -31,3 +31,4 @@ docker run grpc_client_app
 ```
 docker-compose up
 ```
+![](../docs/img/docker-compose.png)
