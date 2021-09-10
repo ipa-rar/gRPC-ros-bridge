@@ -9,10 +9,10 @@ from grpc_ros_interface.msg import BrokerResponse
 
 class ClientPublisher(Node):
     """""
-    Publishes 'BrokerRequest' to Topic 'request_topic'
+    Publishes 'BrokerRequest' to Topic 'grpc_request'
     0.1 sec interval publishing and QoS is 10 by default
     """""
-    def __init__(self, topic='request_topic', msg_type=BrokerRequest):
+    def __init__(self, topic='grpc_request', msg_type=BrokerRequest):
         super().__init__('data_publisher')
         self.pub = self.create_publisher(
             msg_type,
@@ -42,7 +42,7 @@ class ClientSubscriber(Node):
     as and when the message is available in the topic
     """""
 
-    def __init__(self, topic='response_topic', msg_type=BrokerResponse):
+    def __init__(self, topic='grpc_response', msg_type=BrokerResponse):
         super().__init__('data_subscriber')
         self.client_subsciber = self.create_subscription(
             msg_type,
