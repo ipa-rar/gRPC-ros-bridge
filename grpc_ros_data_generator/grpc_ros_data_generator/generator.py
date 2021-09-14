@@ -14,14 +14,14 @@ class ClientPublisher(Node):
     """""
     def __init__(self, topic='grpc_request', msg_type=BrokerRequest):
         super().__init__('data_publisher')
-        self.pub = self.create_publisher(
+        self.client_pub = self.create_publisher(
             msg_type,
             topic,
             10)
-        publish_rate = 0.5
+        PUB_RATE = 0.5
         self.i = 0
         #self.timer = self.create_timer(publish_rate, self.publisher_cb)
-        self.timer = self.create_timer(publish_rate, self.publisher_cb)
+        self.timer = self.create_timer(PUB_RATE, self.publisher_cb)
 
     def publisher_cb(self):
         msg = BrokerRequest()
@@ -44,7 +44,7 @@ class ClientSubscriber(Node):
 
     def __init__(self, topic='grpc_response', msg_type=BrokerResponse):
         super().__init__('data_subscriber')
-        self.client_subsciber = self.create_subscription(
+        self.client_sub = self.create_subscription(
             msg_type,
             topic,
             self.subscriber_cb,
