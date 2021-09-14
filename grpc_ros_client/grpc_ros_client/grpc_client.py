@@ -21,7 +21,8 @@ class GrpcClient(Node):
     def __init__(self, 
                 topic_sub='grpc_request', 
                 topic_pub='grpc_response', 
-                msg_type=BrokerRequest):
+                req_msg_type=BrokerRequest,
+                res_msg_type=BrokerResponse):
         super().__init__('broker_service_request')
         """
         initializes the grpc communciation channel, 
@@ -30,13 +31,13 @@ class GrpcClient(Node):
         channel = grpc.insecure_channel(PORT)
         self.stub = pb2_grpc.BrokerServiceStub(channel)
         self.sub = self.create_subscription(
-            msg_type,
+            req_msg_type,
             topic_sub,
             self.grpc_server_request,
             10
         )
         self.pub = self.create_publisher(
-            BrokerResponse,
+            res_msg_type,
             topic_pub,
             10
         )
