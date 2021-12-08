@@ -1,23 +1,22 @@
 <?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<package format="3">
+<package format="2">
   <name>grpc_ros_data_generator</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="ragesh.ramachandran@ipa.fraunhofer.de">ragesh</maintainer>
-  <license>TODO: License declaration</license>
+  <description>The grpc_ros_data_generator package</description>
+  <maintainer email="rar@todo.todo">rar</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <depend>grpc_ros_interface</depend>
 
-  <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>python3-pytest</test_depend>
-
-  <test_depend>ros_testing</test_depend>
-  <test_depend>python3-pytest</test_depend>
-  <test_depend>launch_testing</test_depend>
-  <test_depend>launch_testing_ros</test_depend>
 
   <export>
-    <build_type>ament_python</build_type>
+    <!-- Other tools can request additional information be placed here -->
+
   </export>
 </package>

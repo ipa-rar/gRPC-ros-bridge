@@ -1,5 +1,6 @@
+# fields of message type BrokerRequest
 int32 id
-float32 sensor_1
-float32 sensor_2
-float32 sensor_3
-float32 sensor_4
+float32 sensor1
+float32 sensor2
+float32 sensor3
+float32 sensor4
