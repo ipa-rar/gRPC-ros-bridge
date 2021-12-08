@@ -1,4 +1,4 @@
-# gRPC-ros-client [ ROS-noetic ]
+# gRPC-ros-client [ ROS Noetic ]
 
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![Docker badge](https://img.shields.io/docker/pulls/ragesh18/grpc-ros-client.svg)](https://hub.docker.com/repository/docker/ragesh18/grpc-ros-client)
