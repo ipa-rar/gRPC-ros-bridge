@@ -20,17 +20,16 @@ class ClientPublisher(Node):
             10)
         PUB_RATE = 0.5
         self.i = 0
-        #self.timer = self.create_timer(publish_rate, self.publisher_cb)
         self.timer = self.create_timer(PUB_RATE, self.publisher_cb)
 
     def publisher_cb(self):
         msg = BrokerRequest()
         self.i += 1
         msg.id = self.i
-        msg.sensor_1 = float(random.uniform(0, 1))
-        msg.sensor_2 = float(random.uniform(0, 1))
-        msg.sensor_3 = float(random.uniform(0, 1))
-        msg.sensor_4 = float(random.uniform(0, 1))
+        msg.sensor1 = float(random.uniform(0, 1))
+        msg.sensor2 = float(random.uniform(0, 1))
+        msg.sensor3 = float(random.uniform(0, 1))
+        msg.sensor4 = float(random.uniform(0, 1))
         self.pub.publish(msg)
         #self.get_logger().info('Client streaming :| %d | %g | %g | %g | %g |' %
         #                       (msg.id, msg.sensor_1, msg.sensor_2, msg.sensor_3, msg.sensor_4))

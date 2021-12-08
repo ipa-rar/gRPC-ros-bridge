@@ -51,10 +51,10 @@ class GrpcClient(Node):
         # Send request payload as ROS msg
         request = pb2.BrokerRequest(
             id=int(msg.id),
-            sensor1=float(msg.sensor_1),
-            sensor2=float(msg.sensor_2),
-            sensor3=float(msg.sensor_3),
-            sensor4=float(msg.sensor_4))
+            sensor1=float(msg.sensor1),
+            sensor2=float(msg.sensor2),
+            sensor3=float(msg.sensor3),
+            sensor4=float(msg.sensor4))
         response = self.stub.SimpleMethod(request)
         # Convert the protobuff response payload to ROS msg
         self.msg = BrokerResponse()
