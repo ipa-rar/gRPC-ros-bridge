@@ -25,12 +25,6 @@ jobs:
   login-dockerhub:
     needs: checkout
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    defaults:
-      run:
-        working-directory: ./docker
     steps:
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -55,7 +49,16 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-    
+  build-dockerimage:
+    needs: [checkout, login-dockerhub]
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    defaults:
+      run:
+        working-directory: ./docker
+    steps:
       - name: Build and push Docker images of grpc-ros-client
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
