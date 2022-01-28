@@ -8,8 +8,15 @@ on:
 
 jobs:
         
-  login-dockerhub:
+  build-and-push:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    defaults:
+      run:
+        working-directory: ./docker
+        
     steps:
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
@@ -23,17 +30,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-  build-and-push:
-    needs: login-dockerhub
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    defaults:
-      run:
-        working-directory: ./docker
-    steps:
       - name: Check out the repo
         uses: actions/checkout@v2
         
