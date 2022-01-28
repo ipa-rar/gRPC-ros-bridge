@@ -7,23 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-
-  checkout:
-
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
-    defaults:
-      run:
-        working-directory: ./docker
-
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
         
   login-dockerhub:
-    needs: checkout
     runs-on: ubuntu-latest
     steps:
       - name: Log in to Docker Hub
@@ -38,19 +23,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Extract metadata (tags, labels) of grpc-server-app
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: |
-            ragesh18/grpc-server-app
-            ghcr.io/${{ github.repository }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
 
-  build-dockerimage:
-    needs: [checkout, login-dockerhub]
+  build-and-push:
+    needs: login-dockerhub
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -59,6 +34,9 @@ jobs:
       run:
         working-directory: ./docker
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        
       - name: Extract metadata (tags, labels) of grpc-server-app
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
